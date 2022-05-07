@@ -1,6 +1,5 @@
 TgCrypto
 pyrogram==1.4.16
-py-tgcalls==0.8.3
 requests
 aiohttp
 aiofiles
@@ -13,3 +12,13 @@ yt-dlp
 python-dotenv
 gTTS
 googletrans==4.0.0rc1
+git+https://github.com/pyrogram/pyrogram@master
+py-tgcalls==0.8.1b25
+asyncio
+youtube-search-python
+youtube-dl
+python-dotenv
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
