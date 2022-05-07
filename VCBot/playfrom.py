@@ -8,7 +8,7 @@ from pyrogram.types import Message
 from pytgcalls import StreamType
 from pytgcalls.types.input_stream import AudioPiped
 
-@Client.on_message(filters.command(['playfrom'], prefixes=f"{HNDLR}"))
+@Client.on_message(filters.command(['تشغيل'], prefixes=f"{HNDLR}"))
 async def playfrom(client, m: Message):
    chat_id = m.chat.id
    if len(m.command) < 2:
@@ -21,7 +21,7 @@ async def playfrom(client, m: Message):
       else:
          chat = args
          limit = 10
-      hmm = await m.reply(f"Searching the last **{limit}** Songs from `{chat}`")
+      hmm = await m.reply(f"البحث في الماضي **{limit}** أغاني من `{chat}`")
       try:
          async for x in bot.search_messages(chat, limit=limit, filter="audio"):
                location = await x.download()
@@ -41,7 +41,7 @@ async def playfrom(client, m: Message):
                      stream_type=StreamType().pulse_stream,
                   )
                   add_to_queue(chat_id, songname, location, link)
-                  await m.reply(f"**Started Playing Songs from {chat} ▶** \n**🎧 SONG** : [{songname}]({link}) \n**💬 CHAT** : `{chat_id}`", disable_web_page_preview=True)
+                  await m.reply(f"**بدأ تشغيل الأغاني من {chat} ▶** \n**🎧 الاسم** : [{songname}]({link}) \n**ℹ️ معرف الدردشة** : `{chat_id}`", disable_web_page_preview=True)
          await hmm.delete()
          await m.reply(f"Added **{limit}** SONGS to Queue")
       except Exception as e:
