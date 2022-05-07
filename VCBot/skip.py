@@ -5,17 +5,17 @@ from config import bot, call_py, HNDLR, contact_filter
 from VCBot.handlers import skip_current_song, skip_item
 from VCBot.queues import QUEUE, clear_queue
 
-@Client.on_message(contact_filter & filters.command(['skip'], prefixes=f"{HNDLR}"))
+@Client.on_message(contact_filter & filters.command(['تخطي'], prefixes=f"{HNDLR}"))
 async def skip(client, m: Message):
    chat_id = m.chat.id
    if len(m.command) < 2:
       op = await skip_current_song(chat_id)
       if op==0:
-         await m.reply("`Nothing Is Playing`")
+         await m.reply("`ماكو شي مشتغل حبي`")
       elif op==1:
-         await m.reply("`Queue is Empty, Leaving Voice Chat...`")
+         await m.reply("`قائمة الانتضار فارغة ، تم مغادرة الدردشة الصوتية...`")
       else:
-         await m.reply(f"**Skipped ⏭** \n**🎧 Now Playing** - [{op[0]}]({op[1]})", disable_web_page_preview=True)
+         await m.reply(f"**ابشر عيني المطور** \n**🎧 الان يتخطي** - [{op[0]}]({op[1]})", disable_web_page_preview=True)
    else:
       skip = m.text.split(None, 1)[1]
       OP = "**Removed the following songs from Queue:-**"
@@ -33,39 +33,39 @@ async def skip(client, m: Message):
                   OP = OP + "\n" + f"**#{x}** - {hm}"
          await m.reply(OP)        
       
-@Client.on_message(contact_filter & filters.command(['end', 'stop'], prefixes=f"{HNDLR}"))
+@Client.on_message(contact_filter & filters.command(['ايقاف', 'كافي'], prefixes=f"{HNDLR}"))
 async def stop(client, m: Message):
    chat_id = m.chat.id
    if chat_id in QUEUE:
       try:
          await call_py.leave_group_call(chat_id)
          clear_queue(chat_id)
-         await m.reply("**Stopped Streaming ⏹️**")
+         await m.reply("**اهلين عيني المطور ابشر تم الايقاف ⏹️**")
       except Exception as e:
          await m.reply(f"**ERROR** \n`{e}`")
    else:
-      await m.reply("`Nothing is Streaming`")
+      await m.reply("`لايوجد شي قيد التشغيل`")
    
-@Client.on_message(contact_filter & filters.command(['pause'], prefixes=f"{HNDLR}"))
+@Client.on_message(contact_filter & filters.command(['مؤقت'], prefixes=f"{HNDLR}"))
 async def pause(client, m: Message):
    chat_id = m.chat.id
    if chat_id in QUEUE:
       try:
          await call_py.pause_stream(chat_id)
-         await m.reply("**Paused Streaming ⏸️**")
+         await m.reply("**تم الإيقاف ⏸️**")
       except Exception as e:
          await m.reply(f"**ERROR** \n`{e}`")
    else:
-      await m.reply("`Nothing is Streaming`")
+      await m.reply("`ماكو شي مشتغل`")
       
-@Client.on_message(contact_filter & filters.command(['resume'], prefixes=f"{HNDLR}"))
+@Client.on_message(contact_filter & filters.command(['استمرار'], prefixes=f"{HNDLR}"))
 async def resume(client, m: Message):
    chat_id = m.chat.id
    if chat_id in QUEUE:
       try:
          await call_py.resume_stream(chat_id)
-         await m.reply("**Resumed Streaming ▶**")
+         await m.reply("**تم الاستمرار ▶**")
       except Exception as e:
          await m.reply(f"**ERROR** \n`{e}`")
    else:
-      await m.reply("`Nothing is Streaming`")
+      await m.reply("`لايوجد شي قيد التشغيل`")
