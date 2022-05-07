@@ -45,13 +45,13 @@ async def ytdl(link):
       return 0, stderr.decode()
 
 
-@Client.on_message(filters.command(['play'], prefixes=f"{HNDLR}"))
+@Client.on_message(filters.command(['ش'], prefixes=f"{HNDLR}"))
 async def play(client, m: Message):
    replied = m.reply_to_message
    chat_id = m.chat.id
    if replied:
       if replied.audio or replied.voice:
-         huehue = await replied.reply("`Downloading`")
+         huehue = await replied.reply("`جاري التشغيل...،💗🎧`")
          dl = await replied.download()
          link = replied.link
          if replied.audio:
@@ -63,7 +63,7 @@ async def play(client, m: Message):
             songname = "Voice Note"
          if chat_id in QUEUE:
             pos = add_to_queue(chat_id, songname, dl, link)
-            await huehue.edit(f"Queued at **#{pos}**")
+            await huehue.edit(f"تم اضافتها الى قائمة الانتضار **#{pos}**")
          else:
             await call_py.join_group_call(
                chat_id,
@@ -73,16 +73,16 @@ async def play(client, m: Message):
                stream_type=StreamType().pulse_stream,
             )
             add_to_queue(chat_id, songname, dl, link)
-            await huehue.edit(f"**Started Playing ▶** \n**🎧 SONG** : [{songname}]({link}) \n**💬 CHAT** : `{chat_id}`", disable_web_page_preview=True)
+            await huehue.edit(f"**تم بدء تشغيل الاغنية ،💗🎧** \n**🎧 الاسم** : [{songname}]({link}) \n**ℹ️ معرف الدردشة** : `{chat_id}`", disable_web_page_preview=True)
       else:
          if len(m.command) < 2:
-            await m.reply("`Reply to an Audio File or give something to Search`")
+            await m.reply("`الرد على ملف صوتي أو إعطاء شيء للبحث`")
          else:
-            huehue = await m.reply("`Searching...`")
+            huehue = await m.reply("`جاري البحث`")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search==0:
-               await huehue.edit("`Found Nothing for the Given Query`")
+               await huehue.edit("`لم يتم العثور على شيء`")
             else:
                songname = search[0]
                url = search[1]
@@ -92,7 +92,7 @@ async def play(client, m: Message):
                else:
                   if chat_id in QUEUE:
                      pos = add_to_queue(chat_id, songname, ytlink, url)
-                     await huehue.edit(f"Queued at **#{pos}**")
+                     await huehue.edit(f"تم اضافته الى قائمة الانتضار **#{pos}**")
                   else:
                      try:
                         await call_py.join_group_call(
@@ -103,19 +103,19 @@ async def play(client, m: Message):
                            stream_type=StreamType().pulse_stream,
                         )
                         add_to_queue(chat_id, songname, ytlink, url)
-                        await huehue.edit(f"**Started Playing ▶** \n**🎧 SONG** : [{songname}]({url}) \n**💬 CHAT** : `{chat_id}`", disable_web_page_preview=True)
+                        await huehue.edit(f"**تم بدء تشغيل الاغنية ،💗🎧** \n**🎧 الاسم** : [{songname}]({url}) \n**ℹ️ معرف الدردشة** : `{chat_id}`", disable_web_page_preview=True)
                      except Exception as ep:
                         await huehue.edit(f"`{ep}`")
             
    else:
          if len(m.command) < 2:
-            await m.reply("`Reply to an Audio File or give something to Search`")
+            await m.reply("`الرد على ملف صوتي او اعطاء شي للبحث`")
          else:
-            huehue = await m.reply("`Searching...`")
+            huehue = await m.reply("`جاري البحث`")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search==0:
-               await huehue.edit("`Found Nothing for the Given Query`")
+               await huehue.edit("`لم يتم العثور على شي`")
             else:
                songname = search[0]
                url = search[1]
@@ -125,7 +125,7 @@ async def play(client, m: Message):
                else:
                   if chat_id in QUEUE:
                      pos = add_to_queue(chat_id, songname, ytlink, url)
-                     await huehue.edit(f"Queued at **#{pos}**")
+                     await huehue.edit(f"تم اضافته الى الانتضار **#{pos}**")
                   else:
                      try:
                         await call_py.join_group_call(
@@ -136,6 +136,6 @@ async def play(client, m: Message):
                            stream_type=StreamType().pulse_stream,
                         )
                         add_to_queue(chat_id, songname, ytlink, url)
-                        await huehue.edit(f"**Started Playing ▶** \n**🎧 SONG** : [{songname}]({url}) \n**💬 CHAT** : `{chat_id}`", disable_web_page_preview=True)
+                        await huehue.edit(f"**تم بدء تشغيل الاغنية ،💗🎧** \n**🎧 الاسم** : [{songname}]({url}) \n**ℹ️ معرف الدردشة** : `{chat_id}`", disable_web_page_preview=True)
                      except Exception as ep:
                         await huehue.edit(f"`{ep}`")
