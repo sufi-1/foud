@@ -1,29 +1,29 @@
 {
-    "name": "TG-MusicPlayer",
-    "description": "A Telegram Userbot to play Songs in Voice Chat",
-    "logo": "https://telegra.ph/file/12a12ad933f3f972deb61.jpg",
+    "name": "سورس خاص",
+    "description": "فريدوم حب",
+    "logo": "https://te.legra.ph/file/2a726c634dbc3b9e8f451.jpg",
     "keywords": [
         "Telegram",
         "VCBot",
         "MusicPlayer"
     ],
-    "repository": "https://github.com/Lost-In-Dark/TG-MusicPlayer",
+    "repository": "https://github.com/muntazer995/xxl4",
     "env": {
         "SESSION": {
-            "description": "Pyrogram String Session",
+            "description": "اكتب كود ترمكس",
             "required": true
         },
         "API_ID": {
-            "description": "my.telegram.org",
+            "description": "8934899",
             "required": true
         },
         "API_HASH": {
-            "description": "my.telegram.org",
+            "description": "bf3e98d2c351e4ad06946b4897374a1e",
             "required": true
         },
         "HNDLR": {
-            "description": "Handler | Default (!)",
-            "value": "!",
+            "description": "اتركها كما هي",
+            "value": "",
             "required": false
         }
     },
